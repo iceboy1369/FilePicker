@@ -21,7 +21,7 @@ Android Library to select files/directories from Device Storage
 
 ### Screenshot
 
-![](https://github.com/TutorialsAndroid/FilePicker/blob/master/screenshots/device-2019-05-10-182300.png)
+![](https://github.com/iceboy1369/FilePicker/blob/master/Screenshot_20201015-115715.jpg)
 
 ### Features
 
