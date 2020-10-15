@@ -15,7 +15,7 @@ Android Library to select files/directories from Device Storage
 
 **Library available at JitPack.io**
 
-[![](https://jitpack.io/v/TutorialsAndroid/FilePicker.svg)](https://jitpack.io/#TutorialsAndroid/FilePicker)
+[![](https://jitpack.io/v/TutorialsAndroid/FilePicker.svg)](https://jitpack.io/iceboy1369/FilePicker)
 
 `Latest version of this library is migrated to androidx`
 
