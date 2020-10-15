@@ -35,7 +35,6 @@ import java.util.Objects;
 /**
  * @author akshay sunil masram
  */
-@SuppressWarnings("unused")
 public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickListener {
 
     private final Context context;
@@ -208,6 +207,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 parent.setLocation(Objects.requireNonNull(currLoc.getParentFile())
                         .getAbsolutePath());
                 parent.setTime(currLoc.lastModified());
+                parent.setSize(currLoc.length());
                 internalList.add(parent);
             } else if (properties.root.exists() && properties.root.isDirectory()) {
                 currLoc = new File(properties.root.getAbsolutePath());
@@ -248,6 +248,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                         parent.setLocation(Objects.requireNonNull(currLoc
                                 .getParentFile()).getAbsolutePath());
                         parent.setTime(currLoc.lastModified());
+                        parent.setSize(currLoc.length());
                         internalList.add(parent);
                     }
                     internalList = Utility.prepareFileListEntries(internalList, currLoc, filter,
@@ -315,6 +316,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                             item.setDirectory(temp.isDirectory());
                             item.setMarked(true);
                             item.setTime(temp.lastModified());
+                            item.setSize(temp.length());
                             item.setLocation(temp.getAbsolutePath());
                             MarkedItemList.addSelectedItem(item);
                         }
@@ -327,6 +329,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                             item.setDirectory(temp.isDirectory());
                             item.setMarked(true);
                             item.setTime(temp.lastModified());
+                            item.setSize(temp.length());
                             item.setLocation(temp.getAbsolutePath());
                             MarkedItemList.addSelectedItem(item);
                         }
@@ -339,6 +342,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                             item.setDirectory(temp.isDirectory());
                             item.setMarked(true);
                             item.setTime(temp.lastModified());
+                            item.setSize(temp.length());
                             item.setLocation(temp.getAbsolutePath());
                             MarkedItemList.addSelectedItem(item);
                         }
@@ -355,6 +359,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                                 item.setDirectory(temp.isDirectory());
                                 item.setMarked(true);
                                 item.setTime(temp.lastModified());
+                                item.setSize(temp.length());
                                 item.setLocation(temp.getAbsolutePath());
                                 MarkedItemList.addSelectedItem(item);
                             }
@@ -368,6 +373,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                                 item.setDirectory(temp.isDirectory());
                                 item.setMarked(true);
                                 item.setTime(temp.lastModified());
+                                item.setSize(temp.length());
                                 item.setLocation(temp.getAbsolutePath());
                                 MarkedItemList.addSelectedItem(item);
                             }
@@ -381,6 +387,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                                 item.setDirectory(temp.isDirectory());
                                 item.setMarked(true);
                                 item.setTime(temp.lastModified());
+                                item.setSize(temp.length());
                                 item.setLocation(temp.getAbsolutePath());
                                 MarkedItemList.addSelectedItem(item);
                             }
@@ -434,6 +441,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                     parent.setLocation(Objects.requireNonNull(currLoc.getParentFile())
                             .getAbsolutePath());
                     parent.setTime(currLoc.lastModified());
+                    parent.setSize(currLoc.length());
                     internalList.add(parent);
                 }
                 internalList = Utility.prepareFileListEntries(internalList, currLoc, filter,

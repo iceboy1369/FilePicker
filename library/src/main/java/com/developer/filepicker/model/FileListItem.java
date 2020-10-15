@@ -9,7 +9,11 @@ public class FileListItem implements Comparable<FileListItem> {
 
     private String filename,location;
     private boolean directory,marked;
-    private long time;
+    private long time, size;
+
+    public long getSize() { return size; }
+
+    public void setSize(long size) { this.size = size; }
 
     public String getFilename() {
         return filename;

@@ -2,12 +2,11 @@ package com.developer.filepicker.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-
 import com.developer.filepicker.model.FileListItem;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -26,6 +25,10 @@ public class Utility {
         }
     }
 
+    public static String getFileSize(long bytes){
+        return String.format(Locale.ENGLISH, "%.2f MB", bytes / (1024.00 * 1024.00));
+    }
+
     public static ArrayList<FileListItem>
     prepareFileListEntries(ArrayList<FileListItem> internalList, File inter,
                            ExtensionFilter filter, boolean show_hidden_files) {
@@ -35,6 +38,7 @@ public class Utility {
                     if(name.getName().startsWith(".") && !show_hidden_files) continue;
                     FileListItem item = new FileListItem();
                     item.setFilename(name.getName());
+                    item.setSize(name.length());
                     item.setDirectory(name.isDirectory());
                     item.setLocation(name.getAbsolutePath());
                     item.setTime(name.lastModified());

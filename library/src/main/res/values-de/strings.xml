@@ -5,4 +5,6 @@
     <string name="choose_button_label">Auswählen</string>
     <string name="label_parent_directory">Übergeordnetes Verzeichnis</string>
     <string name="last_edit">Zuletzt bearbeitet: %1$s, %2$s</string>
+    <string name="last_edit_date">Zuletzt bearbeitet: %1$s</string>
+    <string name="detail">detail</string>
 </resources>

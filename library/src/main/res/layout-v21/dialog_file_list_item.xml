@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:focusable="false"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:listPreferredItemHeight"
     android:descendantFocusability="blocksDescendants"
+    tools:ignore="RtlHardcoded"
     style="?android:attr/background">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:scaleType="centerInside"
-        android:id="@+id/image_type"
-        android:layout_gravity="center" />
+    <com.developer.filepicker.widget.MaterialCheckbox
+        android:id="@+id/file_mark"
+        android:layout_width="@dimen/checkbox_dimens"
+        android:layout_height="@dimen/checkbox_dimens"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/checkbox_margin"
+        android:layout_marginLeft="@dimen/checkbox_margin"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,6 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:focusable="false"
+        tools:ignore="RtlHardcoded"
         android:gravity="center_vertical"
         style="?android:attr/background">
 
@@ -33,21 +37,51 @@
             android:id="@+id/fname"
             android:textStyle="bold"
             android:textSize="16sp"
-            style="?android:attr/textAppearanceLarge"/>
+            android:singleLine="true"
+            android:gravity="right|center"
+            style="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ftype"
-            android:textSize="12sp"
-            style="?android:attr/textViewStyle"/>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+
+            <TextView
+                android:id="@+id/fDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:gravity="right|center"
+                style="?android:attr/textViewStyle"/>
+
+<!--            <Space-->
+<!--                android:layout_width="15dp"-->
+<!--                android:layout_height="1dp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/ftype"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="12sp"-->
+<!--                android:singleLine="true"-->
+<!--                android:gravity="right|center"-->
+<!--                style="?android:attr/textViewStyle"/>-->
+
+<!--        </LinearLayout>-->
+
     </LinearLayout>
 
-    <com.developer.filepicker.widget.MaterialCheckbox
-        android:id="@+id/file_mark"
-        android:layout_width="@dimen/checkbox_dimens"
-        android:layout_height="@dimen/checkbox_dimens"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/checkbox_margin"
-        android:background="?android:attr/selectableItemBackgroundBorderless"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerInside"
+        android:id="@+id/image_type"
+        android:layout_gravity="center"
+        tools:ignore="ContentDescription" />
+
 </LinearLayout>
