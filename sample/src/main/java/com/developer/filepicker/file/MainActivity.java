@@ -93,60 +93,58 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox show_hidden_files = findViewById(R.id.show_hidden_files);
         Button apply = findViewById(R.id.apply);
         Button showDialog = findViewById(R.id.show_dialog);
-        apply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String fextension = extension.getText().toString();
-                if (fextension.length() > 0) {
-                    //Add extensions to be sorted from the EditText input to the array of String.
-                    int commas = countCommas(fextension);
+        apply.setOnClickListener(view -> {
+            String fextension = extension.getText().toString();
+            if (fextension.length() > 0) {
+                //Add extensions to be sorted from the EditText input to the array of String.
+                int commas = countCommas(fextension);
 
-                    //Array representing extensions.
-                    String[] exts = new String[commas + 1];
-                    StringBuffer buff = new StringBuffer();
-                    int i = 0;
-                    for (int j = 0; j < fextension.length(); j++) {
-                        if (fextension.charAt(j) == ',') {
-                            exts[i] = buff.toString();
-                            buff = new StringBuffer();
-                            i++;
-                        } else {
-                            buff.append(fextension.charAt(j));
-                        }
+                //Array representing extensions.
+                String[] exts = new String[commas + 1];
+                StringBuffer buff = new StringBuffer();
+                int i = 0;
+                for (int j = 0; j < fextension.length(); j++) {
+                    if (fextension.charAt(j) == ',') {
+                        exts[i] = buff.toString();
+                        buff = new StringBuffer();
+                        i++;
+                    } else {
+                        buff.append(fextension.charAt(j));
                     }
-                    exts[i] = buff.toString();
-
-                    //Set String Array of extensions.
-                    properties.extensions = exts;
-                } else {   //If EditText is empty, Initialise with null reference.
-                    properties.extensions = null;
                 }
-                String foffset = root.getText().toString();
-                if (foffset.length() > 0 || !foffset.equals("")) {
-                    //Setting Parent Directory.
-                    properties.root = new File(foffset);
-                } else {
-                    //Setting Parent Directory to Default SDCARD.
-                    properties.root = new File(DialogConfigs.DEFAULT_DIR);
-                }
+                exts[i] = buff.toString();
 
-                String fset = offset.getText().toString();
-                if (fset.length() > 0 || !fset.equals("")) {
-                    //Setting Offset Directory.
-                    properties.offset = new File(fset);
-                } else {
-                    //Setting Parent Directory to Default SDCARD.
-                    properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-                }
+                //Set String Array of extensions.
+                properties.extensions = exts;
+            } else {   //If EditText is empty, Initialise with null reference.
+                properties.extensions = null;
+            }
+            String foffset = root.getText().toString();
+            if (foffset.length() > 0 || !foffset.equals("")) {
+                //Setting Parent Directory.
+                properties.root = new File(foffset);
+            } else {
+                //Setting Parent Directory to Default SDCARD.
+                properties.root = new File(DialogConfigs.DEFAULT_DIR);
+            }
 
-                properties.show_hidden_files = show_hidden_files.isChecked();
+            String fset = offset.getText().toString();
+            if (fset.length() > 0 || !fset.equals("")) {
+                //Setting Offset Directory.
+                properties.offset = new File(fset);
+            } else {
+                //Setting Parent Directory to Default SDCARD.
+                properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+            }
 
-                //Setting Alternative Directory, in case root is not accessible.This will be
-                //used.
+            properties.show_hidden_files = show_hidden_files.isChecked();
 
-                properties.error_dir = new File("/mnt");
-                //Set new properties of dialog.
-                dialog.setProperties(properties);
+            //Setting Alternative Directory, in case root is not accessible.This will be
+            //used.
+
+            properties.error_dir = new File("/mnt");
+            //Set new properties of dialog.
+            dialog.setProperties(properties);
 
 //                Pre marking of files in Dialog
 //                ArrayList<String> paths=new ArrayList<>();
@@ -157,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
 //                paths.add("/mnt/sdcard/.VOD/1020.jpg");
 //                paths.add("/mnt/sdcard/.VOD/1070.jpg");
 //                dialog.markFiles(paths);
-            }
         });
 
         showDialog.setOnClickListener(new View.OnClickListener() {
