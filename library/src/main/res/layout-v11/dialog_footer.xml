@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:background="@null"/>
 
-    <Button
+    <TextView
         android:background="?android:attr/selectableItemBackground"
         android:text="@string/cancel_button_label"
         android:id="@+id/cancel"
@@ -24,9 +24,12 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:layout_margin="8dp"
-        android:padding="4dp"/>
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"/>
 
-    <Button
+    <TextView
         android:background="?android:attr/selectableItemBackground"
         android:text="@string/choose_button_label"
         android:textStyle="bold"
@@ -35,5 +38,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:layout_margin="8dp"
-        android:padding="4dp"/>
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"/>
 </LinearLayout>

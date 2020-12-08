@@ -4,17 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.developer.filepicker.R;
 import com.developer.filepicker.controller.DialogSelectionListener;
 import com.developer.filepicker.controller.NotifyItemChecked;
@@ -26,7 +23,6 @@ import com.developer.filepicker.model.MarkedItemList;
 import com.developer.filepicker.utils.ExtensionFilter;
 import com.developer.filepicker.utils.Utility;
 import com.developer.filepicker.widget.MaterialCheckbox;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +35,12 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
 
     private final Context context;
     private ListView listView;
-    private TextView dname, dir_path, title;
+    private TextView dname, dir_path, title, select;
     private DialogProperties properties;
     private DialogSelectionListener callbacks;
     private ArrayList<FileListItem> internalList;
     private ExtensionFilter filter;
     private FileListAdapter mFileListAdapter;
-    private Button select;
     private String titleStr = null;
     private String positiveBtnNameStr = null;
     private String negativeBtnNameStr = null;
@@ -88,18 +83,17 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         if (size == 0) {
             select.setEnabled(false);
             int color;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                color = context.getResources().getColor(R.color.colorAccent, context.getTheme());
-            } else {
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                color = context.getResources().getColor(R.color.colorAccent, context.getTheme());
+//            } else {
                 color = context.getResources().getColor(R.color.colorAccent);
-            }
-            select.setTextColor(Color.argb(128, Color.red(color), Color.green(color),
-                    Color.blue(color)));
+//            }
+            select.setTextColor(color);
         }
         dname = findViewById(R.id.dname);
         title = findViewById(R.id.title);
         dir_path = findViewById(R.id.dir_path);
-        Button cancel = findViewById(R.id.cancel);
+        TextView cancel = findViewById(R.id.cancel);
         if (negativeBtnNameStr != null) {
             cancel.setText(negativeBtnNameStr);
         }
@@ -129,24 +123,24 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 if (size == 0) {
                     select.setEnabled(false);
                     int color;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        color = context.getResources().getColor(R.color.colorAccent,
-                                context.getTheme());
-                    } else {
+//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                        color = context.getResources().getColor(R.color.colorAccent,
+//                                context.getTheme());
+//                    } else {
                         color = context.getResources().getColor(R.color.colorAccent);
-                    }
-                    select.setTextColor(Color.argb(128, Color.red(color), Color.green(color),
-                            Color.blue(color)));
+//                    }
+                    select.setTextColor(color);
+
                     select.setText(positiveBtnNameStr);
                 } else {
                     select.setEnabled(true);
                     int color;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        color = context.getResources().getColor(R.color.colorAccent,
-                                context.getTheme());
-                    } else {
+//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                        color = context.getResources().getColor(R.color.colorAccent,
+//                                context.getTheme());
+//                    } else {
                         color = context.getResources().getColor(R.color.colorAccent);
-                    }
+//                    }
                     select.setTextColor(color);
                     String button_label = positiveBtnNameStr + " (" + size + ") ";
                     select.setText(button_label);
