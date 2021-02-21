@@ -61,6 +61,17 @@ Step 2. Add the dependency
 ```
 
 ## FilePickerDialog
+
+IMPORTANT: In the ANDROID 11 (R) you need to grant the all file access to see files. so do start new Intent in your activity
+
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      if (!Environment.isExternalStorageManager()) {
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+            startActivity(intent);
+      }
+}
+
 1. Start by creating an instance of `DialogProperties`.
 
     ```java
