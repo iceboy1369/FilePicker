@@ -245,8 +245,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                         parent.setSize(currLoc.length());
                         internalList.add(parent);
                     }
-                    internalList = Utility.prepareFileListEntries(internalList, currLoc, filter,
-                            properties.show_hidden_files);
+                    internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
                     mFileListAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(context, R.string.error_dir_access,
@@ -396,8 +395,14 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     public void show() {
         if (!Utility.checkStorageAccessPermissions(context)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ((Activity) context).requestPermissions(new String[]{Manifest.permission
-                        .READ_EXTERNAL_STORAGE}, EXTERNAL_READ_PERMISSION_GRANT);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+                    ((Activity) context).requestPermissions(new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.MANAGE_EXTERNAL_STORAGE},
+                            EXTERNAL_READ_PERMISSION_GRANT);
+                }else {
+                    ((Activity) context).requestPermissions(new String[]{Manifest.permission
+                            .READ_EXTERNAL_STORAGE}, EXTERNAL_READ_PERMISSION_GRANT);
+                }
             }
         } else {
             super.show();

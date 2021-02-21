@@ -115,11 +115,7 @@ public class FileListAdapter extends BaseAdapter {
             if (i == 0 && item.getFilename().startsWith(context.getString(R.string.label_parent_dir))) {
                 holder.checkbox.setVisibility(View.INVISIBLE);
             }
-            if (MarkedItemList.hasItem(item.getLocation())) {
-                holder.checkbox.setChecked(true);
-            } else {
-                holder.checkbox.setChecked(false);
-            }
+            holder.checkbox.setChecked(MarkedItemList.hasItem(item.getLocation()));
         }
 
         holder.checkbox.setOnCheckedChangedListener(new OnCheckedChangeListener() {

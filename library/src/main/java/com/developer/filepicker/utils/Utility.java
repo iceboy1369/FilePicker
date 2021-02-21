@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * @author akshay sunil masram
@@ -29,11 +28,11 @@ public class Utility {
         return String.format(Locale.ENGLISH, "%.2f MB", bytes / (1024.00 * 1024.00));
     }
 
-    public static ArrayList<FileListItem>
-    prepareFileListEntries(ArrayList<FileListItem> internalList, File inter,
-                           ExtensionFilter filter, boolean show_hidden_files) {
+    public static ArrayList<FileListItem> prepareFileListEntries(ArrayList<FileListItem> internalList,
+                           File inter, ExtensionFilter filter, boolean show_hidden_files) {
         try {
-            for (File name : Objects.requireNonNull(inter.listFiles(filter))) {
+            File[] files  = inter.listFiles(filter);
+            for (File name : files) {
                 if (name.canRead()) {
                     if(name.getName().startsWith(".") && !show_hidden_files) continue;
                     FileListItem item = new FileListItem();

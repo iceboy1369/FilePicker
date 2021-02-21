@@ -13,7 +13,7 @@ public abstract class DialogConfigs {
 
     /*  PARENT_DIRECTORY*/
     private static final String DIRECTORY_SEPARATOR = "/";
-    private static final String STORAGE_DIR = "mnt";
+    private static final String STORAGE_DIR = "storage/emulated/0/"; // "mnt/"
 
     /*  DEFAULT_DIR is the default mount point of the SDCARD. It is the default
      *  mount point.

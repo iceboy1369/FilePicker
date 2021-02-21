@@ -26,8 +26,8 @@ public class ExtensionFilter implements FileFilter {
 
     @Override
     public boolean accept(File file) {
-        if (file.isDirectory()&&file.canRead())
-        {   return true;
+        if (file.isDirectory()&&file.canRead()) {
+            return true;
         }
         else if(properties.selection_type== DialogConfigs.DIR_SELECT) {
             return false;

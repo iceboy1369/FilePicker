@@ -5,23 +5,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.developer.filepicker.controller.DialogSelectionListener;
 import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -42,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         fileList.setAdapter(mFileListAdapter);
         fileList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         fileList.setNestedScrollingEnabled(false);
+
 
         //Create a DialogProperties object.
         final DialogProperties properties = new DialogProperties();
@@ -157,12 +154,9 @@ public class MainActivity extends AppCompatActivity {
 //                dialog.markFiles(paths);
         });
 
-        showDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Showing dialog when Show Dialog button is clicked.
-                dialog.show();
-            }
+        showDialog.setOnClickListener(view -> {
+            //Showing dialog when Show Dialog button is clicked.
+            dialog.show();
         });
 
         //Method handle selected files.
