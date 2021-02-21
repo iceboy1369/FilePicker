@@ -43,7 +43,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.iceboy1369:FilePicker:v9.0.1'
+	        implementation 'com.github.iceboy1369:FilePicker:v9.0.3'
 	}
 
 ### Usage
@@ -60,10 +60,9 @@ Step 2. Add the dependency
 </manifest>
 ```
 
-## FilePickerDialog
+**IMPORTANT: If you are using Android 11 or higher then you need to grant the all_files_access to see files. so do start new Intent in your activity**
 
-IMPORTANT: In the ANDROID 11 (R) you need to grant the all file access to see files. so do start new Intent in your activity
-
+```
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
       if (!Environment.isExternalStorageManager()) {
             Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
@@ -71,6 +70,9 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             startActivity(intent);
       }
 }
+```
+
+## FilePickerDialog
 
 1. Start by creating an instance of `DialogProperties`.
 
