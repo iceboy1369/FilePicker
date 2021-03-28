@@ -1,7 +1,12 @@
 package com.developer.filepicker.file;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
         fileList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         fileList.setNestedScrollingEnabled(false);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+                startActivity(intent);
+            }
+        }
 
         //Create a DialogProperties object.
         final DialogProperties properties = new DialogProperties();
