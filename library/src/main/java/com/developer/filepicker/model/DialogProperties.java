@@ -1,6 +1,18 @@
 package com.developer.filepicker.model;
 
+import android.content.Context;
+import android.os.Build;
+import android.os.Environment;
+import android.text.TextUtils;
+
 import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * @author akshay sunil masram

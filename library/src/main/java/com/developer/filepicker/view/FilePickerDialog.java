@@ -4,16 +4,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.developer.filepicker.R;
 import com.developer.filepicker.controller.DialogSelectionListener;
 import com.developer.filepicker.controller.NotifyItemChecked;
@@ -46,6 +43,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     private String titleStr = null;
     private String positiveBtnNameStr = null;
     private String negativeBtnNameStr = null;
+    private String exSdcard = "";
 
     public static final int EXTERNAL_READ_PERMISSION_GRANT = 112;
 
@@ -85,11 +83,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         if (size == 0) {
             select.setEnabled(false);
             int color;
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                color = context.getResources().getColor(R.color.colorAccent, context.getTheme());
-//            } else {
-                color = context.getResources().getColor(R.color.colorAccent);
-//            }
+            color = context.getResources().getColor(R.color.colorAccent);
             select.setTextColor(color);
         }
         dname = findViewById(R.id.dname);
@@ -125,24 +119,13 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 if (size == 0) {
                     select.setEnabled(false);
                     int color;
-//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                        color = context.getResources().getColor(R.color.colorAccent,
-//                                context.getTheme());
-//                    } else {
-                        color = context.getResources().getColor(R.color.colorAccent);
-//                    }
+                    color = context.getResources().getColor(R.color.colorAccent);
                     select.setTextColor(color);
-
                     select.setText(positiveBtnNameStr);
                 } else {
                     select.setEnabled(true);
                     int color;
-//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-//                        color = context.getResources().getColor(R.color.colorAccent,
-//                                context.getTheme());
-//                    } else {
-                        color = context.getResources().getColor(R.color.colorAccent);
-//                    }
+                    color = context.getResources().getColor(R.color.colorAccent);
                     select.setTextColor(color);
                     String button_label = positiveBtnNameStr + " (" + size + ") ";
                     select.setText(button_label);
@@ -205,16 +188,40 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 parent.setTime(currLoc.lastModified());
                 parent.setSize(currLoc.length());
                 internalList.add(parent);
+                internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
             } else if (properties.root.exists() && properties.root.isDirectory()) {
-                currLoc = new File(properties.root.getAbsolutePath());
+
+//                currLoc = new File(DialogConfigs.SDCARD_DIR);
+                FileListItem parent = new FileListItem();
+                parent.setFilename(context.getString(R.string.label_sdcard_dir));
+                parent.setDirectory(true);
+                parent.setLocation(DialogConfigs.SDCARD_DIR);
+                parent.setTime(0);
+                parent.setSize(0);
+                internalList.add(parent);
+
+                String[] exsdcard = Utility.getStorageDirectories(context);
+                if (exsdcard.length>0){
+                    exSdcard = exsdcard[0];
+                    currLoc = new File(exSdcard);
+                    FileListItem parent2 = new FileListItem();
+                    parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
+                    parent2.setDirectory(true);
+                    parent2.setLocation(exsdcard[0]);
+//                    parent2.setTime(currLoc.lastModified());
+//                    parent2.setSize(currLoc.length());
+                    parent2.setTime(0);
+                    parent2.setSize(0);
+                    internalList.add(parent2);
+                }
+                currLoc = new File(DialogConfigs.DEFAULT_DIR);
             } else {
                 currLoc = new File(properties.error_dir.getAbsolutePath());
+                internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
             }
             dname.setText(currLoc.getName());
             dir_path.setText(currLoc.getAbsolutePath());
             setTitle();
-            internalList = Utility.prepareFileListEntries(internalList, currLoc, filter,
-                    properties.show_hidden_files);
             mFileListAdapter.notifyDataSetChanged();
             listView.setOnItemClickListener(this);
         }
@@ -250,8 +257,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                     internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
                     mFileListAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(context, R.string.error_dir_access,
-                            Toast.LENGTH_SHORT).show();
+                    onStart();
                 }
             } else {
                 MaterialCheckbox fmark = view.findViewById(R.id.file_mark);
@@ -428,8 +434,10 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         if (internalList.size() > 0) {
             FileListItem fitem = internalList.get(0);
             File currLoc = new File(fitem.getLocation());
-            if (currentDirName.equals(properties.root.getName()) ||
-                    !currLoc.canRead()) {
+
+            if (!currLoc.canRead()){
+                onStart();
+            }else if (currentDirName.equals(properties.root.getName())) {
                 super.onBackPressed();
             } else {
                 dname.setText(currLoc.getName());

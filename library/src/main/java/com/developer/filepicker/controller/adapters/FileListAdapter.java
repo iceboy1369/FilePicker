@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.developer.filepicker.R;
 import com.developer.filepicker.controller.NotifyItemChecked;
@@ -79,7 +80,20 @@ public class FileListAdapter extends BaseAdapter {
             DateFormat dateFormatter = android.text.format.DateFormat.getMediumDateFormat(context);
             holder.detail.setText(String.format(context.getString(R.string.last_edit_date), dateFormatter.format(date)));
 
-            holder.type_icon.setImageResource(R.mipmap.ic_type_folder);
+            if (item.getFilename().equalsIgnoreCase(context.getResources().getString(R.string.label_sdcard_dir))){
+                holder.type_icon.setImageResource(R.drawable.ic_sdcard);
+                holder.separator.setVisibility(View.VISIBLE);
+                holder.detail.setVisibility(View.GONE);
+            }else if (item.getFilename().equalsIgnoreCase(context.getResources().getString(R.string.label_exsdcard_dir))){
+                holder.type_icon.setImageResource(R.drawable.ic_exsdcard);
+                holder.separator.setVisibility(View.VISIBLE);
+                holder.detail.setVisibility(View.GONE);
+            }else{
+                holder.type_icon.setImageResource(R.mipmap.ic_type_folder);
+                holder.separator.setVisibility(View.GONE);
+                holder.detail.setVisibility(View.VISIBLE);
+            }
+
             holder.type_icon.setColorFilter(null);
 
             if (properties.selection_type == DialogConfigs.FILE_SELECT) {
@@ -88,6 +102,7 @@ public class FileListAdapter extends BaseAdapter {
                 holder.checkbox.setVisibility(View.VISIBLE);
             }
         } else {
+            holder.separator.setVisibility(View.GONE);
             String size = Utility.getFileSize(item.getSize());
             holder.detail.setText(size);
 
@@ -140,6 +155,7 @@ public class FileListAdapter extends BaseAdapter {
     private static class ViewHolder {
         ImageView type_icon;
         TextView name,detail;
+        RelativeLayout separator;
         MaterialCheckbox checkbox;
 
         ViewHolder(View itemView) {
@@ -147,6 +163,7 @@ public class FileListAdapter extends BaseAdapter {
             detail = itemView.findViewById(R.id.fDetail);
             type_icon = itemView.findViewById(R.id.image_type);
             checkbox = itemView.findViewById(R.id.file_mark);
+            separator = itemView.findViewById(R.id.separator);
         }
     }
 

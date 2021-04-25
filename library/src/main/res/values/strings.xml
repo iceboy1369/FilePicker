@@ -8,5 +8,7 @@
    <string name="last_edit_date">آخرین ویرایش: %1$s</string>
    <string name="error_dir_access">عدم دسترسی به این پوشه</string>
    <string name="label_parent_dir" translatable="false">..</string>
+   <string name="label_sdcard_dir" translatable="false">حافظه داخلی</string>
+   <string name="label_exsdcard_dir" translatable="false">کارت حافظه</string>
    <string name="detail">جزئیات</string>
 </resources>
