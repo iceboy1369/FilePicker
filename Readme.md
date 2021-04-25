@@ -43,7 +43,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.iceboy1369:FilePicker:v9.0.3'
+	        implementation 'com.github.iceboy1369:FilePicker:v9.1.0'
 	}
 
 ### Usage
@@ -142,7 +142,7 @@ Marshmallow and above requests for the permission on runtime. You should overrid
 
 
 ### Important:
-* `defaultValue`, `error_dir`, `root_dir`, `offset_dir` must have valid directory/file paths.
+* `defaultValue`, `error_dir`, `root_dir`, `sdcard_dir`, `offset_dir` must have valid directory/file paths.
 * `defaultValue` paths should end with ':'.
 * `defaultValue` can have multiple paths, there should be a ':' between two paths.
 * `extensions` must not have '.'.
