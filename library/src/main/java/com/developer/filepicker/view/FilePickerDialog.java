@@ -43,7 +43,6 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     private String titleStr = null;
     private String positiveBtnNameStr = null;
     private String negativeBtnNameStr = null;
-    private String exSdcard = "";
 
     public static final int EXTERNAL_READ_PERMISSION_GRANT = 112;
 
@@ -191,7 +190,6 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
             } else if (properties.root.exists() && properties.root.isDirectory()) {
 
-//                currLoc = new File(DialogConfigs.SDCARD_DIR);
                 FileListItem parent = new FileListItem();
                 parent.setFilename(context.getString(R.string.label_sdcard_dir));
                 parent.setDirectory(true);
@@ -202,14 +200,10 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
 
                 String[] exsdcard = Utility.getStorageDirectories(context);
                 if (exsdcard.length>0){
-                    exSdcard = exsdcard[0];
-                    currLoc = new File(exSdcard);
                     FileListItem parent2 = new FileListItem();
                     parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
                     parent2.setDirectory(true);
                     parent2.setLocation(exsdcard[0]);
-//                    parent2.setTime(currLoc.lastModified());
-//                    parent2.setSize(currLoc.length());
                     parent2.setTime(0);
                     parent2.setSize(0);
                     internalList.add(parent2);
