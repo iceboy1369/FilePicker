@@ -188,6 +188,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 parent.setSize(currLoc.length());
                 internalList.add(parent);
                 internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
+                properties.offset = new File(DialogConfigs.DEFAULT_DIR);
             } else if (properties.root.exists() && properties.root.isDirectory()) {
 
                 FileListItem parent = new FileListItem();
