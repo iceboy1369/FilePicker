@@ -43,7 +43,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.iceboy1369:FilePicker:v9.1.1'
+	        implementation 'com.github.iceboy1369:FilePicker:v9.1.2'
 	}
 
 ### Usage
