@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -191,24 +192,61 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 properties.offset = new File(DialogConfigs.DEFAULT_DIR);
             } else if (properties.root.exists() && properties.root.isDirectory()) {
 
-                FileListItem parent = new FileListItem();
-                parent.setFilename(context.getString(R.string.label_sdcard_dir));
-                parent.setDirectory(true);
-                parent.setLocation(DialogConfigs.SDCARD_DIR);
-                parent.setTime(0);
-                parent.setSize(0);
-                internalList.add(parent);
+//                FileListItem parent = new FileListItem();
+//                parent.setFilename(context.getString(R.string.label_sdcard_dir));
+//                parent.setDirectory(true);
+//                parent.setLocation(DialogConfigs.SDCARD_DIR);
+//                parent.setTime(0);
+//                parent.setSize(0);
+//                internalList.add(parent);
+//
+//                String exst = Environment.getExternalStorageState();
+//                String ex = Environment.getExternalStorageState();
+//
+//                String[] exsdcard = Utility.getStorageDirectories(context);
+//                if (exsdcard.length>0){
+//                    FileListItem parent2 = new FileListItem();
+//                    parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
+//                    parent2.setDirectory(true);
+//                    parent2.setLocation(exsdcard[0]);
+//                    parent2.setTime(0);
+//                    parent2.setSize(0);
+//                    internalList.add(parent2);
+//                }
 
-                String[] exsdcard = Utility.getStorageDirectories(context);
-                if (exsdcard.length>0){
-                    FileListItem parent2 = new FileListItem();
-                    parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
-                    parent2.setDirectory(true);
-                    parent2.setLocation(exsdcard[0]);
-                    parent2.setTime(0);
-                    parent2.setSize(0);
-                    internalList.add(parent2);
+                String[] allStorage = Utility.getStorageDirectories(context);
+                for (int i = 0; i<allStorage.length; i++){
+                    File storage = new File(allStorage[i]);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        if (Environment.isExternalStorageRemovable(storage)){
+                            FileListItem parent2 = new FileListItem();
+                            parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
+                            parent2.setDirectory(true);
+                            parent2.setLocation(storage.getPath());
+                            parent2.setTime(0);
+                            parent2.setSize(0);
+                            internalList.add(parent2);
+                        }else {
+                            FileListItem parent = new FileListItem();
+                            parent.setFilename(context.getString(R.string.label_sdcard_dir));
+                            parent.setDirectory(true);
+                            parent.setLocation(storage.getPath());
+                            parent.setTime(0);
+                            parent.setSize(0);
+                            internalList.add(parent);
+                        }
+                    }else {
+                        FileListItem parent = new FileListItem();
+                        parent.setFilename(context.getString(R.string.label_card_dir) + i);
+                        parent.setDirectory(true);
+                        parent.setLocation(storage.getPath());
+                        parent.setTime(0);
+                        parent.setSize(0);
+                        internalList.add(parent);
+                    }
                 }
+
+
                 currLoc = new File(DialogConfigs.DEFAULT_DIR);
             } else {
                 currLoc = new File(properties.error_dir.getAbsolutePath());

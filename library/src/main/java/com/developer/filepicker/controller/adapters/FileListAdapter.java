@@ -88,6 +88,10 @@ public class FileListAdapter extends BaseAdapter {
                 holder.type_icon.setImageResource(R.drawable.ic_exsdcard);
                 holder.separator.setVisibility(View.VISIBLE);
                 holder.detail.setVisibility(View.GONE);
+            }else if (item.getFilename().equalsIgnoreCase(context.getResources().getString(R.string.label_card_dir))){
+                holder.type_icon.setImageResource(R.drawable.ic_exsdcard);
+                holder.separator.setVisibility(View.VISIBLE);
+                holder.detail.setVisibility(View.GONE);
             }else{
                 holder.type_icon.setImageResource(R.mipmap.ic_type_folder);
                 holder.separator.setVisibility(View.GONE);
