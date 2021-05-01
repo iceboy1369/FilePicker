@@ -8,8 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.developer.filepicker.R;
@@ -79,6 +81,28 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         setContentView(R.layout.dialog_main);
         listView = findViewById(R.id.fileList);
         select = findViewById(R.id.select);
+
+        LinearLayout background = findViewById(R.id.background);
+        ViewGroup.LayoutParams parentParams = background.getLayoutParams();
+
+        int[] a = Utility.get_Device_height_width(context);
+        if (a[0]<a[1]) {  //landscape
+            parentParams.height = (a[0]/5)*4;
+            parentParams.width = (a[1]/5)*2;
+        }else {           // portrait
+
+            if (Utility.isTablet(context)){
+                parentParams.width = (a[1]/7)*3;
+                parentParams.height = (a[0]/7)*3;
+            }else {
+                parentParams.width = (a[1]/6)*5;
+                parentParams.height = (a[0]/7)*4;
+            }
+        }
+        background.setLayoutParams(parentParams);
+
+
+
         int size = MarkedItemList.getFileCount();
         if (size == 0) {
             select.setEnabled(false);
@@ -190,30 +214,8 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 internalList.add(parent);
                 internalList = Utility.prepareFileListEntries(internalList, currLoc, filter, properties.show_hidden_files);
                 properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+
             } else if (properties.root.exists() && properties.root.isDirectory()) {
-
-//                FileListItem parent = new FileListItem();
-//                parent.setFilename(context.getString(R.string.label_sdcard_dir));
-//                parent.setDirectory(true);
-//                parent.setLocation(DialogConfigs.SDCARD_DIR);
-//                parent.setTime(0);
-//                parent.setSize(0);
-//                internalList.add(parent);
-//
-//                String exst = Environment.getExternalStorageState();
-//                String ex = Environment.getExternalStorageState();
-//
-//                String[] exsdcard = Utility.getStorageDirectories(context);
-//                if (exsdcard.length>0){
-//                    FileListItem parent2 = new FileListItem();
-//                    parent2.setFilename(context.getString(R.string.label_exsdcard_dir));
-//                    parent2.setDirectory(true);
-//                    parent2.setLocation(exsdcard[0]);
-//                    parent2.setTime(0);
-//                    parent2.setSize(0);
-//                    internalList.add(parent2);
-//                }
-
                 String[] allStorage = Utility.getStorageDirectories(context);
                 for (int i = 0; i<allStorage.length; i++){
                     File storage = new File(allStorage[i]);

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         //Instantiate FilePickerDialog with Context and DialogProperties.
         dialog = new FilePickerDialog(MainActivity.this, properties);
         dialog.setTitle("انتخاب فایل");
-        properties.offset = new File("/storage/emulated/0/Download/");
+//        properties.offset = new File("/storage/emulated/0/Download/");
 //        dialog.setPositiveBtnName("Select");
 //        dialog.setNegativeBtnName("Cancel");
       //  properties.selection_mode = DialogConfigs.MULTI_MODE;
